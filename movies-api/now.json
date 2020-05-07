@@ -1,0 +1,12 @@
+{
+  "name": "richy-video",
+  "version": 2,
+  "builds": [{ "src": "index.js", "use": "@now/node" }],
+  "routes": [{ "src": "/(.*)", "dest": "/index.js" }],
+  "env": {
+    "DB_USER": "@richyvideo-db-userr",
+    "DB_PASSWORD": "@richyvideo-db-passwordd",
+    "DB_HOST": "@richyvideo-db-hostt",
+    "DB_NAME": "@richyvideo-db-namee"
+  }
+}
