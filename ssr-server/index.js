@@ -4,6 +4,7 @@ const session = require("express-session");
 const boom = require("@hapi/boom");
 const cookieParser = require("cookie-parser");
 const axios = require("axios");
+const helmet = require('helmet');
 
 const { config } = require("./config");
 
@@ -15,6 +16,7 @@ app.use(cookieParser());
 app.use(session({ secret: config.sessionSecret }));
 app.use(passport.initialize());
 app.use(passport.session());
+app.use(helmet());
 
 //  Basic strategy
 require("./utils/auth/strategies/basic");
@@ -159,6 +161,10 @@ app.get(
     res.status(200).json(user);
   }
 );
+
+app.get("/auth/facebook", passport.authenticate("facebook"), {
+  scope: ["email", "profile", "openid"]
+});
 
 app.listen(config.port, function() {
   console.log(`Listening http://localhost:${config.port}`);
